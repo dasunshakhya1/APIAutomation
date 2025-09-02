@@ -1,20 +1,26 @@
-﻿using Core.Utils;
+﻿using Core.Endpoints.Product.models;
+using Core.Utils;
 using Core.Utils.models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Endpoints.Product
 {
     public class ProductController
     {
 
-        public static async Task<Response> GetProductsById(string productId)
+        private static readonly string _uri = "/objects";
+
+        public static async Task<Response> GetProductById(string productId)
         {
-            string uri = $"/objects/{productId}";
+            string uri = $"{_uri}/{productId}";
+            return await HttpClientImpl.HttpGet(uri);
+        }
+
+
+        public static async Task<Response> GetProducts()
+        {
+            string uri = $"{_uri}";
             return await HttpClientImpl.HttpGet(uri);
         }
     }
 }
+
