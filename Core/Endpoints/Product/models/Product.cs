@@ -13,5 +13,18 @@ namespace Core.Endpoints.Product.models
 
         [JsonPropertyName("data")]
         public ProductData Data { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Product product &&
+                   Id == product.Id &&
+                   Name == product.Name &&
+                   EqualityComparer<ProductData>.Default.Equals(Data, product.Data);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Name, Data);
+        }
     }
 }

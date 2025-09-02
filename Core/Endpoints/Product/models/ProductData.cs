@@ -20,5 +20,22 @@ namespace Core.Endpoints.Product.models
 
         [JsonPropertyName("Hard disk size")]
         public string HardDiskSize { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is ProductData data &&
+                   Year == data.Year &&
+                   Price == data.Price &&
+                   CpuModel == data.CpuModel &&
+                   HardDiskSize == data.HardDiskSize;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Year, Price, CpuModel, HardDiskSize);
+        }
     }
+
+
+
 }

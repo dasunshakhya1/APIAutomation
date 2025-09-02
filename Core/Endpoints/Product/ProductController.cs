@@ -14,7 +14,7 @@ namespace Core.Endpoints.Product
         public static async Task<Response> GetProductsById(string productId)
         {
             string uri = $"/objects/{productId}";
-          return await  HttpClientImpl.HttpGet(uri);
+            return await HttpClientImpl.HttpGet(uri);
         }
     }
 }

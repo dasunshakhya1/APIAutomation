@@ -31,7 +31,7 @@ namespace Core.Utils
             Console.WriteLine(content);
             Console.WriteLine(statusCode);
 
-           return new Response(content, statusCode);
+            return new Response(content, statusCode);
 
         }
     }
