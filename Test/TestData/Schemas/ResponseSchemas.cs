@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Core.Endpoints.Product
+{
+    public class ResponseSchemas
+    {
+
+        public static string productGetByIdSchema()
+        {
+
+            return @"{
+  '$schema': 'http://json-schema.org/draft-07/schema#',
+  'title': 'Product',
+  'type': 'object',
+  'properties': {
+    'id': {
+      'type': 'string'
+    },
+    'name': {
+      'type': 'string'
+    },
+    'data': {
+      'type': 'object',
+      'properties': {
+        'year': {
+          'type': 'integer'
+        },
+        'price': {
+          'type': 'number'
+        },
+        'CPU model': {
+          'type': 'string'
+        },
+        'Hard disk size': {
+          'type': 'string'
+        }
+      },
+      'required': ['year', 'price', 'CPU model', 'Hard disk size'],
+      'additionalProperties': false
+    }
+  },
+  'required': ['id', 'name', 'data'],
+  'additionalProperties': false
+}
+";
+        }
+    }
+}

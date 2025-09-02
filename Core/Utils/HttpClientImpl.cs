@@ -1,4 +1,5 @@
 ﻿using Core.Configs;
+using Core.Utils.models;
 using RestSharp;
 using RestSharp.Authenticators;
 using System;
@@ -19,13 +20,18 @@ namespace Core.Utils
 
 
 
-        public static async void HttpGet(string url)
+        public static async Task<Response> HttpGet(string url)
 
         {
             RestRequest restRequest = new(url);
             RestResponse response = await client.GetAsync(restRequest);
-            string? content = response.Content;
+            string content = response.Content;
+            var headers = response.Headers;
+            int statusCode = (int)response.StatusCode;
             Console.WriteLine(content);
+            Console.WriteLine(statusCode);
+
+           return new Response(content, statusCode);
 
         }
     }
