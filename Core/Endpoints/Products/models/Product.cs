@@ -7,13 +7,13 @@ namespace Core.Endpoints.Products.models
 
 
         [JsonPropertyName("id")]
-        private string? Id { get; set; }
+        public string? Id { get; set; }
 
         [JsonPropertyName("name")]
-        private string? Name { get; set; }
+        public string? Name { get; set; }
 
         [JsonPropertyName("data")]
-        private ProductData? Data { get; set; }
+        public ProductData? Data { get; set; }
 
 
         public Product()

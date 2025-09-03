@@ -11,5 +11,9 @@ namespace Core.Utils
             return JsonSerializer.Deserialize<T>(json);
 
         }
+
+        public static string SerializeJson<T>(T obj) { 
+            return JsonSerializer.Serialize(obj);
+        }
     }
 }

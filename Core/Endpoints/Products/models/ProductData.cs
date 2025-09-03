@@ -5,16 +5,16 @@ namespace Core.Endpoints.Products.models
     public class ProductData
     {
         [JsonPropertyName("year")]
-        private int Year { get; set; }
+        public int Year { get; set; }
 
         [JsonPropertyName("price")]
-        private double Price { get; set; }
+        public double Price { get; set; }
 
         [JsonPropertyName("CPU model")]
-        private string? CpuModel { get; set; }
+        public string? CpuModel { get; set; }
 
         [JsonPropertyName("Hard disk size")]
-        private string? HardDiskSize { get; set; }
+        public string? HardDiskSize { get; set; }
 
         public ProductData() { }
         public ProductData(int year, double price, string? cpuModel, string? hardDiskSize)

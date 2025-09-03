@@ -8,21 +8,18 @@ namespace Test
 {
     public class ProductControllerTests
     {
-
+        Product createdProduct;
 
         [Fact]
         public async Task Test_GetProducts_ReturnsAtLeastOneProduct()
         {
             string schemaJson = "get.products.schema.json";
             string productJson = "products.json";
-
             string expectedSchema = await FileReader.GetSchema(schemaJson);
             List<Product> expectedProduct = JsonParser.ParseJson<List<Product>>(await FileReader.GetJsonData(productJson));
           
             Response res = await ProductController.GetProducts();
-
             List<Product> actualProduct = JsonParser.ParseJson<List<Product>>(res.Content);
-
             bool isValidSchema = SchemaValidator.IsValidSchema(expectedSchema, res.Content);
 
             Assert.Equal(200, res.StatusCode);
@@ -38,14 +35,11 @@ namespace Test
             string schemaJson = "get.product.schema.json";
             string productJson = "product.json";
             string productId = "7";
-
             string expectedSchema = await FileReader.GetSchema(schemaJson);
             Product expectedProduct = JsonParser.ParseJson<Product>(await FileReader.GetJsonData(productJson));
 
             Response res = await ProductController.GetProductById(productId);
-
             Product actualProduct = JsonParser.ParseJson<Product>(res.Content);
-
             bool isValidSchema = SchemaValidator.IsValidSchema(expectedSchema, res.Content);
 
             Assert.Equal(200, res.StatusCode);
@@ -61,14 +55,11 @@ namespace Test
             string schemaJson = "error.schema.json";
             string productJson = "error.json";
             string productId = "981";
-
             string expectedSchema = await FileReader.GetSchema(schemaJson);
             Product expectedProduct = JsonParser.ParseJson<Product>(await FileReader.GetJsonData(productJson));
 
             Response res = await ProductController.GetProductById(productId);
-
             Product actualProduct = JsonParser.ParseJson<Product>(res.Content);
-
             bool isValidSchema = SchemaValidator.IsValidSchema(expectedSchema, res.Content);
 
             Assert.Equal(404, res.StatusCode);
@@ -82,26 +73,43 @@ namespace Test
         {
 
             ProductData productData = new(2025,2200.25, "Intel Core i12","1 TB");
-            Product product = new("Apple MacBook Pro 17", productData);
-
+            Product product = new ("Apple MacBook Pro 17", productData);
 
             string schemaJson = "add.product.schema.json";
-         //   string productJson = "error.json";
-        //    string productId = "981";
-
             string expectedSchema = await FileReader.GetSchema(schemaJson);
-         //   Product expectedProduct = JsonParser.ParseJson<Product>(await FileReader.GetJsonData(productJson));
 
             Response res = await ProductController.AddProduct(product);
-            Console.WriteLine(res.Content);
-
-            Product actualProduct = JsonParser.ParseJson<Product>(res.Content);
-
+            createdProduct = JsonParser.ParseJson<Product>(res.Content);
             bool isValidSchema = SchemaValidator.IsValidSchema(expectedSchema, res.Content);
 
             Assert.Equal(200, res.StatusCode);
             Assert.True(isValidSchema);
-         //   Assert.Equal(expectedProduct, actualProduct);
+            Assert.Equal(product.Name, createdProduct.Name);
+            Assert.Equal(product.Data, createdProduct.Data);
         }
+
+        [Fact]
+        public async Task Test_UpdateProduct_ReturnsUpdatedProduct()
+        {
+
+            ProductData productData = new(2025, 2200.25, "Intel Core i12", "1 TB");
+            Product product = new("Apple MacBook Pro 17 Plus", productData);
+
+            string schemaJson = "add.product.schema.json";
+            string expectedSchema = await FileReader.GetSchema(schemaJson);
+
+            Response res = await ProductController.AddProduct(product);
+            Product actualProduct = JsonParser.ParseJson<Product>(res.Content);
+            bool isValidSchema = SchemaValidator.IsValidSchema(expectedSchema, res.Content);
+
+            Assert.Equal(200, res.StatusCode);
+            Assert.True(isValidSchema);
+            Assert.Equal(product.Name, actualProduct.Name);
+            Assert.Equal(product.Data, actualProduct.Data);
+        }
+
+
+
+
     }
 }
