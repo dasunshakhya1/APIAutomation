@@ -125,7 +125,6 @@ namespace Test
 
             Assert.Equal(200, res.StatusCode);
             Assert.True(isValidSchema);
-         //   Assert.Equal(updatedProduct, actualProduct);
         }
 
 
@@ -133,7 +132,7 @@ namespace Test
         public async Task Test_GetProductById_ReturnsProductNotFoundError()
         {
 
-            string schemaJson = "get.product.schema.json";
+            string schemaJson = "error.schema.json";
             string expectedSchema = await FileReader.GetSchema(schemaJson);
 
             Response res = await ProductController.GetProductById(createdProduct.Id);
@@ -142,7 +141,7 @@ namespace Test
 
             Assert.Equal(200, res.StatusCode);
             Assert.True(isValidSchema);
-         //   Assert.Equal(updatedProduct, actualProduct);
+
         }
     }
 }
