@@ -1,4 +1,4 @@
-﻿namespace Core.Utils
+﻿namespace Test.Utils
 {
     public static class FileReader
     {

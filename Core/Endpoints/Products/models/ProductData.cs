@@ -1,20 +1,29 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Core.Endpoints.Product.models
+namespace Core.Endpoints.Products.models
 {
     public class ProductData
     {
         [JsonPropertyName("year")]
-        public int Year { get; set; }
+        private int Year { get; set; }
 
         [JsonPropertyName("price")]
-        public double Price { get; set; }
+        private double Price { get; set; }
 
         [JsonPropertyName("CPU model")]
-        public string CpuModel { get; set; }
+        private string? CpuModel { get; set; }
 
         [JsonPropertyName("Hard disk size")]
-        public string HardDiskSize { get; set; }
+        private string? HardDiskSize { get; set; }
+
+        public ProductData() { }
+        public ProductData(int year, double price, string? cpuModel, string? hardDiskSize)
+        {
+            Year = year;
+            Price = price;
+            CpuModel = cpuModel;
+            HardDiskSize = hardDiskSize;
+        }
 
         public override bool Equals(object? obj)
         {

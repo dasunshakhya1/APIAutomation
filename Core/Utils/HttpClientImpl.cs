@@ -1,7 +1,6 @@
 ﻿using Core.Configs;
 using Core.Utils.models;
 using RestSharp;
-using System.Reflection.PortableExecutable;
 
 namespace Core.Utils
 {
@@ -15,7 +14,7 @@ namespace Core.Utils
         private static Response ExtractResponse(RestResponse response)
         {
             IReadOnlyCollection<HeaderParameter>? headers = null;
-            string? content = "";
+            string? content = null;
 
             if (response.Content != null)
             {
@@ -31,8 +30,25 @@ namespace Core.Utils
         public static async Task<Response> HttpGet(string url)
 
         {
-            RestRequest restRequest = new(url);
+            RestRequest restRequest = new(url, Method.Get);
             RestResponse response = await client.GetAsync(restRequest);
+            return ExtractResponse(response);
+
+        }
+
+        public static async Task<Response> HttpPost(string url, object payload)
+
+        {
+
+          
+            RestRequest restRequest = new(url, Method.Post);
+            restRequest.AddJsonBody(payload);
+            var bodyParameter = restRequest.Parameters.FirstOrDefault(p => p.Type == ParameterType.RequestBody);
+
+            Console.WriteLine(bodyParameter.ToString());
+
+            RestResponse response = await client.PostAsync(restRequest);
+          
             return ExtractResponse(response);
 
         }
