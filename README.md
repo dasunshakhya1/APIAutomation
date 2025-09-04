@@ -25,5 +25,8 @@ dotnet build
 dotnet test --logger "trx;LogFileName=TestResults.trx"
 ```
 
+###  Test results
+Test > TestResults > TestResults.trx
+
 
 
