@@ -38,7 +38,6 @@ namespace Core.Utils
         public static async Task<Response> HttpPost(string url, object payload)
 
         {
-            Console.WriteLine(url);
             RestRequest restRequest = new(url, Method.Post);
             restRequest.AddJsonBody(payload);
             RestResponse response = await client.PostAsync(restRequest);
@@ -50,7 +49,6 @@ namespace Core.Utils
         public static async Task<Response> HttpPut(string url, object payload)
 
         {
-
             RestRequest restRequest = new(url, Method.Put);
             restRequest.AddJsonBody(payload);
             RestResponse response = await client.PutAsync(restRequest);
@@ -59,15 +57,26 @@ namespace Core.Utils
 
         }
 
-
-
-        public static async Task<Response> HttpDelete(string url)
+        public static async Task<Response> HttpPatch(string url, object payload)
 
         {
-            RestRequest restRequest = new(url, Method.Delete);
-            RestResponse response = await client.GetAsync(restRequest);
+            RestRequest restRequest = new(url, Method.Patch);
+            restRequest.AddJsonBody(payload);
+            RestResponse response = await client.PatchAsync(restRequest);
+
             return ExtractResponse(response);
 
         }
+
+
+
+        public static async Task<Response> HttpDelete(string url)
+        {
+            RestRequest restRequest = new(url, Method.Delete);
+            RestResponse response = await client.DeleteAsync(restRequest);
+            return ExtractResponse(response);
+
+        }
+
     }
 }

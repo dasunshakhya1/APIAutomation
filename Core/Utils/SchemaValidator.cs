@@ -14,7 +14,6 @@ namespace Core.Utils
 
             if (valid)
             {
-                Console.WriteLine("JSON is valid.");
                 return true;
             }
             Console.WriteLine("JSON is NOT valid. Errors:");

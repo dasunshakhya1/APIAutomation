@@ -12,7 +12,6 @@ namespace Core.Endpoints.Products
         public static async Task<Response> GetProductById(string productId)
         {
             string uri = $"{_uri}/{productId}";
-            Console.WriteLine(uri);
             return await HttpClientImpl.HttpGet(uri);
         }
 
@@ -27,22 +26,28 @@ namespace Core.Endpoints.Products
         {
             string uri = $"{_uri}";
             string payload = JsonParser.SerializeJson(product);
-            return await HttpClientImpl.HttpPost(uri,payload);
+            return await HttpClientImpl.HttpPost(uri, payload);
 
         }
 
 
-        public static async Task<Response> UpdateProductById(string productId,Product product)
+        public static async Task<Response> UpdateProductById(string productId, Product product)
         {
             string uri = $"{_uri}/{productId}";
-            return await HttpClientImpl.HttpPut(uri,product);
+            return await HttpClientImpl.HttpPut(uri, product);
+        }
+
+
+        public static async Task<Response> UpdatePartOfProductById(string productId, Product product)
+        {
+            string uri = $"{_uri}/{productId}";
+            return await HttpClientImpl.HttpPatch(uri, product);
         }
 
 
         public static async Task<Response> DeleteProductById(string productId)
         {
             string uri = $"{_uri}/{productId}";
-            Console.WriteLine(uri);
             return await HttpClientImpl.HttpDelete(uri);
         }
 

@@ -1,7 +1,7 @@
 ﻿using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Test.Orders
+namespace Test.CustomOrders
 {
     public class PriorityOrderer : ITestCaseOrderer
     {

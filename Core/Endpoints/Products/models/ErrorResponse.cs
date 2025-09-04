@@ -6,5 +6,19 @@ namespace Core.Endpoints.Products.models
     {
         [JsonPropertyName("error")]
         public string? Error { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is ErrorResponse response &&
+                   Error == response.Error;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Error);
+        }
     }
+
+
+
 }
