@@ -8,7 +8,7 @@ A **C# API Test Automation framework** built with:
 ## ⚙️ Setup Instructions
 
 ### Prerequisites
-- [.NET 6+ SDK](https://dotnet.microsoft.com/download)
+- [.NET 8+ SDK](https://dotnet.microsoft.com/download)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) or [Rider](https://www.jetbrains.com/rider/)
 - Internet connection (for API calls)
 
@@ -22,7 +22,7 @@ cd APIAutomation
 ```bash
 dotnet restore
 dotnet build
-dotnet test
+dotnet test --logger "trx;LogFileName=TestResults.trx"
 ```
 
 
